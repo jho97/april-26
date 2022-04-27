@@ -15,25 +15,20 @@ function addMovie(event) {
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "x";
   deleteBtn.addEventListener("click", deleteMovie);
+  //this will remove all the whitespace from user's input to use as an id, which could then be used as a selector
+  const movieId = inputField.value.replace(/\s+/g, '');
+  deleteBtn.setAttribute('id', movieId);
   movie.appendChild(deleteBtn);
 
   const list = document.querySelector("ul");
   list.appendChild(movie);
 
-  //or
-  //document.querySelector("ul").appendChild(movie)
-
   inputField.value = ''
 }
 
 function deleteMovie(event) {
-    //intermediate
-    // message.textContent = `${event.target.parentNode.firstChild.textContent} deleted!`
+    message.textContent = `${event.target.parentNode.firstChild.textContent} deleted!`
     
-    //core lab 
-    message.textContent = `Movie deleted!`
-
-    //revealMessage is part of the intermediate instructions
     revealMessage()
 
     event.target.parentNode.remove();
@@ -43,23 +38,16 @@ function crossOffMovie(event) {
     event.target.classList.toggle('checked')
 
     if (event.target.classList.contains('checked') === true) {
-        message.textContent = 'Movie watched!'
-        //interemdiate version
-        //message.textContent = `${event.target.textContent} watched!`
+        message.textContent = `${event.target.textContent} watched!`
     } else {
-        message.textContent = 'Movie added back!'
-        //interemdiate version
-        //message.textContent = `${event.target.textContent} added back!`
+        message.textContent = `${event.target.textContent} added back!`
     }
 
-    //revealMessage will be part of the intermediate instructions
     revealMessage()
 }
 
-
-//revealMessage will be part of the intermediate instructions
 function revealMessage() {
-    // message.classList.remove('hide')
+    message.classList.remove('hide')
     
     setTimeout(() => {
         message.classList.add('hide')
